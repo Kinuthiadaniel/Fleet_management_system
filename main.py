@@ -23,7 +23,8 @@ from cli.cli import (
     list_trips,
     find_trip_by_id,
     update_trip,
-    delete_trip
+    delete_trip,
+    trips_by_driver
 
 
 )
@@ -88,6 +89,8 @@ def main():
             update_trip()
         elif command == "20":
             delete_trip()
+        elif command == "21":
+            trips_by_driver()
 
         else:
 
@@ -115,6 +118,7 @@ def menu():
     print("18. Find Trip by id")
     print("19. Update Trip by id")
     print("20. Delete Trip by id")
+    print("21. Trips by Driver")
 
 if __name__ == "__main__":
     main()

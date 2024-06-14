@@ -139,3 +139,15 @@ class Driver:
         CURSOR.execute(sql, (id,))
         row = CURSOR.fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    def trips_by_driver(self):
+        from models.trips import Trip
+        sql = """
+            SELECT *
+            FROM trips
+            INNER JOIN drivers on trips.driver_id = drivers.id
+            WHERE trips.driver_id =?
+        """
+        CURSOR.execute(sql, (self.id,),)
+        rows = CURSOR.fetchall()
+        return [Trip.instance_from_db(row) for row in rows]

@@ -176,6 +176,13 @@ def delete_trip():
     trip.delete()
     print(f"Trip {trip} deleted")
 
+def trips_by_driver():
+    driver_id = int(input("Enter driver ID: "))
+    driver = Driver.find_by_id(driver_id)
+    trips = driver.trips_by_driver()
+    for trip in trips:
+        print(trip)
+
 
 
     

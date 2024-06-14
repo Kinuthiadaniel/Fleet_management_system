@@ -164,6 +164,8 @@ class Trip:
         CURSOR.execute(sql, (id,))
         trip = CURSOR.fetchone()
         return cls.instance_from_db(trip) if trip else None
+    
+    
 
     
     
