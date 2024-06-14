@@ -40,6 +40,29 @@ class Vehicle:
             raise ValueError("Title must be between 2 and 256 characters")
         self._vin = value
 
+    @classmethod
+    def create_table(cls):
+        sql= """
+            CREATE TABLE IF NOT EXISTS vehicles(
+            id INTEGER PRIMARY KEY,
+            vin VARCHAR,
+            make TEXT,
+            model TEXT,
+            year INTEGER,
+            location TEXT
+            )
+            """
+        CURSOR.execute(sql)
+        CONN.commit()
+    
+    @classmethod
+    def drop_table(cls):
+        sql = """
+            DROP TABLE IF EXISTS vehicles
+        """
+        CURSOR.execute(sql)
+        CONN.commit()
+
     def save(self):
         sql = """
             INSERT INTO vehicles (vin, make, model, year, location)
@@ -111,4 +134,28 @@ class Vehicle:
             vehicle.id= row[0]
             cls.all[vehicle.id] = vehicle
         return vehicle
+    
+    def trips_by_vehicle(self):
+        from models.trips import Trip
+        sql = """
+            SELECT *
+            FROM trips
+            INNER JOIN vehicles on trips.vehicle_id = vehicles.id
+            WHERE trips.vehicle_id =?
+        """
+        CURSOR.execute(sql, (self.id,),)
+        rows = CURSOR.fetchall()
+        return [Trip.instance_from_db(row) for row in rows]
+    
+    def service_record(self):
+        from models.mainatence import Mainatence
+        sql = """
+            SELECT *
+            FROM mainatenance_records
+            INNER JOIN vehicles on mainatenance_records.vehicle_id = vehicles.id
+            WHERE mainatenance_records.vehicle_id =?
+        """
+        CURSOR.execute(sql, (self.id,),)
+        rows = CURSOR.fetchall()
+        return [Mainatence.instance_from_db(row) for row in rows]
     

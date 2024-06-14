@@ -24,7 +24,9 @@ from cli.cli import (
     find_trip_by_id,
     update_trip,
     delete_trip,
-    trips_by_driver
+    trips_by_driver,
+    trips_by_vehicle,
+    list_mainatence_records
 
 
 )
@@ -37,7 +39,8 @@ def main():
         print("Please select an option")
         # Driver.drop_table()
         Driver.create_table()
-        # Vehicle.create_table()
+
+        Vehicle.create_table()
         # Mainatence.drop_table()
         Mainatence.create_table()
         # Trip.drop_table()
@@ -91,6 +94,10 @@ def main():
             delete_trip()
         elif command == "21":
             trips_by_driver()
+        elif command == "22":
+            trips_by_vehicle()
+        elif command == "23":
+            list_mainatence_records()
 
         else:
 
@@ -119,6 +126,8 @@ def menu():
     print("19. Update Trip by id")
     print("20. Delete Trip by id")
     print("21. Trips by Driver")
+    print("22. Trips by Vehicle")
+    print("23. Mainatence records for each vehicle")
 
 if __name__ == "__main__":
     main()

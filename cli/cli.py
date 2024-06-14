@@ -183,6 +183,22 @@ def trips_by_driver():
     for trip in trips:
         print(trip)
 
+def trips_by_vehicle():
+    vehicle_id = int(input("Enter vehicle ID: "))
+    vehicle = Vehicle.find_by_id(vehicle_id)
+    trips = vehicle.trips_by_vehicle()
+    for trip in trips:
+        print(trip)
+
+def list_mainatence_records():
+    vehicle_id = int(input("Enter vehicle id: "))
+    vehicle = Vehicle.find_by_id(vehicle_id)
+    records = vehicle.service_record()
+    for record in records:
+        print(record)
+
+
+
 
 
     
