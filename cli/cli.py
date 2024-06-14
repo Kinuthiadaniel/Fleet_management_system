@@ -1,6 +1,7 @@
 from models.vehicle import Vehicle
 from models.driver import Driver
 from models.mainatence import Mainatence
+from models.trips import Trip
 
 def exit_program():
     print("Goodbye!")
@@ -129,5 +130,52 @@ def delete_mainatence_record():
     record = Mainatence.find_by_id(id)
     record.delete()
     print(f"Record {record} deleted")
+
+
+def create_trip():
+    vehicle_id = int(input("Enter vehicle ID: "))
+    driver_id = int(input("Enter driver ID: "))
+    start_time = input("Enter start time: ")
+    end_time = input("Enter end time: ")
+    distance = int(input("Enter distance: "))
+    try:
+        trip = Trip.create(vehicle_id=vehicle_id, driver_id=driver_id, start_time=start_time, end_time=end_time, distance=distance)
+        print(f"Trip {trip} created")
+    except Exception as e:
+        print(f"Error creating trip: ", e)
+
+def list_trips():
+    trips = Trip.get_all()
+    for trip in trips:
+        print(trip)
+
+def find_trip_by_id():
+    id = int(input("Enter trip ID: "))
+    trip = Trip.find_by_id(id)
+    print(trip)
+
+def update_trip():
+    id = int(input("Enter trip ID: "))
+    vehicle_id = int(input("Enter vehicle ID: "))
+    driver_id = int(input("Enter driver ID: "))
+    start_time = int(input("Enter start time: "))
+    end_time = int(input("Enter end time: "))
+    distance = int(input("Enter distance: "))
+    trip = Trip.find_by_id(id)
+    trip.vehicle_id = vehicle_id
+    trip.driver_id = driver_id
+    trip.start_time = start_time
+    trip.end_time = end_time
+    trip.distance = distance
+    trip.update()
+    print(f"Trip {trip} updated")
+
+def delete_trip():
+    id = int(input("Enter trip ID: "))
+    trip = Trip.find_by_id(id)
+    trip.delete()
+    print(f"Trip {trip} deleted")
+
+
 
     

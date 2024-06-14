@@ -1,6 +1,7 @@
 from models.vehicle import Vehicle
 from models.driver import Driver
 from models.mainatence import Mainatence
+from models.trips import Trip
 from cli.cli import (
     exit_program,
     create_vehicle,
@@ -18,6 +19,11 @@ from cli.cli import (
     find_mainatence_record_by_id,
     update_mainatence_record,
     delete_mainatence_record,
+    create_trip,
+    list_trips,
+    find_trip_by_id,
+    update_trip,
+    delete_trip
 
 
 )
@@ -33,6 +39,8 @@ def main():
         # Vehicle.create_table()
         # Mainatence.drop_table()
         Mainatence.create_table()
+        # Trip.drop_table()
+        Trip.create_table()
 
 
 
@@ -70,6 +78,17 @@ def main():
             update_mainatence_record()
         elif command == "15":
             delete_mainatence_record()
+        elif command == "16":
+            create_trip()
+        elif command == "17":
+            list_trips()
+        elif command == "18":
+            find_trip_by_id()
+        elif command == "19":
+            update_trip()
+        elif command == "20":
+            delete_trip()
+
         else:
 
             print("Invalid command")
@@ -91,6 +110,11 @@ def menu():
     print("13. Find Mainatence Record by id")
     print("14. Update Mainatence Record by id")
     print("15. Delete Mainatence Record by id")
+    print("16. Create Trip")
+    print("17. List all Trips")
+    print("18. Find Trip by id")
+    print("19. Update Trip by id")
+    print("20. Delete Trip by id")
 
 if __name__ == "__main__":
     main()
